@@ -34,6 +34,13 @@ function SEO({ description, lang, meta, title }) {
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
+      link={[
+        {
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css',
+          type: 'text/css',
+          rel: 'stylesheet'
+        }
+      ]}
       meta={[
         {
           name: `description`,

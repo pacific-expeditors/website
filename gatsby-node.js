@@ -24,6 +24,61 @@ exports.createPages = ({graphql, boundActionCreators}) => {
               node {
                 slug
                 title
+                sections {
+                  __typename
+                  ... on ContentfulHeader {
+                    siteTitle
+                    logo {
+                      title
+                      description
+                      file {
+                        url
+                      }
+                    }
+                    mobileLogo {
+                      title
+                      description
+                      file {
+                        url
+                      }
+                    }
+                    navigationLinks {
+                      href
+                      text
+                      alignment
+                      subNavigationLinks {
+                        ... on ContentfulNavigationLinks {
+                          href
+                          text
+                        }
+                      }
+                    }
+                  }
+                  ... on ContentfulFooter {
+                    copyright
+                    logo {
+                      title
+                      description
+                      file {
+                        url
+                      }
+                    }
+                    footerLinks {
+                      href
+                      text
+                    }
+                    socialMediaLinks {
+                      id
+                      title
+                      link
+                      icon {
+                        file {
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -34,13 +89,13 @@ exports.createPages = ({graphql, boundActionCreators}) => {
         }
 
         result.data.allContentfulPage.edges.forEach((edge) => {
-          console.log(edge.node.slug)
           if (edge.node.slug) {
             createPage({
               path: edge.node.slug,
               component: layoutTemplate,
               context: {
                 slug: edge.node.slug,
+                sections: edge.node.sections,
                 title: edge.node.title
               }
             })

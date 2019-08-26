@@ -1,34 +1,29 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import SEO from './SEO'
+import './header.css'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+const Header = ({ siteTitle, mobileLogo, logo, navigationLinks }) => (
+  <div className="header-container">
+    <SEO title={siteTitle} />
+    <h1>
+      <Link
+        className="logo-link"
+        to="/"
+      >
+        <img className="logo-img" src={logo.file.url} alt={logo.description} />
+      </Link>
+    </h1>
+    <div className="hamburger-icon-container">
+      <a className="hamburger-icon">
+      </a>
     </div>
-  </header>
+    
+    {/* <nav>
+
+    </nav> */}
+  </div>
 )
 
 Header.propTypes = {
