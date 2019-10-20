@@ -12,11 +12,11 @@ import PropTypes from "prop-types"
 import "./layout.css"
 
 const Layout = ({ children, pageContext }) => {
-  // console.log(pageContext)
+  console.log(pageContext)
   return (
     <>
       <Suspense fallback={<div>Loading ...</div>}>
-        <header className="header">
+        <header role="banner" className="header">
           {pageContext.sections
             .filter(section => section.__typename === 'ContentfulHeader')
             .map(section => {
@@ -26,19 +26,26 @@ const Layout = ({ children, pageContext }) => {
           }
         </header>
 
-        <main>
+        <main className="main">
           {/* {pageContext.sections.map(section => section.__typename && React.lazy(() => import(`./${section.__typename.toLowerCase()}`)))} */}
         </main>
 
-        <footer>
+        <footer className="footer" role="contentinfo">
+          {pageContext.sections
+            .filter(section => section.__typename === 'ContentfulFooter')
+            .map(section => {
+              const Footer = React.lazy(() => import(`./${section.__typename.replace('Contentful', '').toLowerCase()}`))
+              return <Footer key={section.__typename} {...section} />
+            })
+          }
         </footer>
       </Suspense>
     </>
   )
 }
 
-// Layout.propTypes = {
-//   children: PropTypes.node.isRequired,
-// }
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default Layout

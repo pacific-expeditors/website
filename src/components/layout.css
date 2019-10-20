@@ -1,0 +1,14 @@
+html, body {
+    position: relative;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    font: normal 16px/1.5 Montserrat,sans-serif;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+}

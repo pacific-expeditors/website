@@ -9,29 +9,44 @@ const Header = ({ siteTitle, mobileLogo, logo, navigationLinks }) => (
     <SEO title={siteTitle} />
     <h1>
       <Link
+        role="link"
+        tabIndex={0}
         className="logo-link"
         to="/"
       >
         <img className="logo-img" src={logo.file.url} alt={logo.description} />
+        <img className="logo-img-mobile" src={mobileLogo.file.url} alt={logo.description} />
       </Link>
     </h1>
-    <div className="hamburger-icon-container">
-      <a className="hamburger-icon">
-      </a>
-    </div>
-    
-    {/* <nav>
+    <label htmlFor="menu-toggle" className="hamburger-icon-container">
+      <input type="checkbox" className="hamburger-menu-toggle" id="menu-toggle" hidden aria-hidden="true" />
 
-    </nav> */}
+      <a tabIndex={0} aria-label="Menu" role="button" className="hamburger-icon">
+      </a>
+
+      <div className="main-nav" aria-hidden="true">
+        <nav className="main-nav-container" role="navigation">
+          {navigationLinks.map(navLink => (
+            <Link key={navLink.href} className="main-nav-link" to={navLink.href} role="link" tabIndex={0}>{navLink.text}</Link>
+          ))}
+        </nav>
+      </div>
+    </label>
   </div>
 )
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
+  mobileLogo: PropTypes.object,
+  logo: PropTypes.object,
+  navigationLinks: PropTypes.array
 }
 
 Header.defaultProps = {
   siteTitle: ``,
+  mobileLogo: {},
+  logo: {},
+  navigationLinks: []
 }
 
 export default Header

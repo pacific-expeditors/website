@@ -20,6 +20,7 @@
 
 .logo-img {
     width: 195px;
+    display: none;
 }
 
 .hamburger-icon-container {
@@ -37,6 +38,7 @@
     transition-duration: 75ms;
     margin-top: -2px;
     background-color: #0f4c61;
+    z-index: 1;
 }
 
 .hamburger-icon::before,
@@ -58,4 +60,65 @@
 
 .hamburger-icon::after {
     bottom: -10px;
+}
+
+.hamburger-menu-toggle:checked + .hamburger-icon,
+.hamburger-menu-toggle:checked + .hamburger-icon::before,
+.hamburger-menu-toggle:checked + .hamburger-icon::after {
+    background-color: #fff;
+}
+
+.hamburger-menu-toggle:checked ~ .main-nav {
+    visibility: visible;
+    animation: checked-anim 1s ease both;
+}
+
+.main-nav {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    background: #0f4c61;
+    color: #fff;
+    animation: not-checked-anim 1s ease both;
+}
+
+.main-nav-link {
+    display: block;
+    color: #fff;
+}
+
+.main-nav-container {
+    width: 50%;
+    margin: 25% auto;
+}
+
+@media (min-width: 1200px) {
+    .logo-img-mobile {
+        display: none;
+    }
+
+    .logo-img {
+        display: block;
+    }
+}
+
+@keyframes checked-anim {
+    100% {
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+@keyframes not-checked-anim {
+    0% {
+        width: 100%;
+        height: 100vh;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
 }
